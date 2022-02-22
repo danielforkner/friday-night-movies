@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* LANDING PAGE */
+body.landingPage {
+  display: grid;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+}
+
+.landingPage .mainContainer {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingPage .mainContainer a {
+  border: 1px solid green;
+  text-decoration: none;
+  color: green;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.landingPage .mainContainer a:hover {
+  background-color: lightgreen;
+}
