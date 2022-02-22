@@ -32,3 +32,13 @@ body.landingPage {
 .landingPage .mainContainer a:hover {
   background-color: lightgreen;
 }
+
+/* NEW-POLL . HTML */
+.option {
+  cursor: move;
+}
+
+.option:hover {
+  color: blue;
+  background-color: gray;
+}
