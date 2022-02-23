@@ -1,14 +1,9 @@
-// let poll = document.createElement('p');
 let body = document.querySelector('body');
-// let poster = document.querySelector('.poster');
-// let info = document.querySelector('.info');
+let pollNum = parseInt(body.id);
 
-let pollOptions = JSON.parse(localStorage.getItem('poll1'));
+let pollOptions = JSON.parse(localStorage.getItem(`poll${pollNum}`));
 let length = pollOptions.length;
 console.log(length);
-
-// poll.innerText = localStorage.getItem('poll1');
-// body.append(poll);
 
 let posterImg, title, plot, card, info, poster;
 for (let i = 0; i < length; i++) {

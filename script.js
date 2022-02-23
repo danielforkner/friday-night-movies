@@ -14,6 +14,8 @@ const clearMemoryBtn = document.querySelector('#clearMemory');
 let activePolls = 1;
 let searchResults = [];
 let pollArray1 = [];
+let pollArray2 = [];
+let pollArray3 = [];
 
 // Listen for user search input
 searchForm.addEventListener('submit', (e) => {
@@ -28,9 +30,20 @@ resultsForm.addEventListener('submit', (e) => {
 
 createPollBtn.addEventListener('click', () => {
   // commit the poll to local memory
-  localStorage.setItem(`poll${activePolls}`, JSON.stringify(pollArray1));
-  localStorage.setItem('activePolls', activePolls);
-  console.log(`poll${activePolls} has now been stored locally`);
+  switch (activePolls) {
+    case 1:
+      localStorage.setItem('poll1', JSON.stringify(pollArray1));
+      localStorage.setItem('activePolls', activePolls);
+      break;
+    case 2:
+      localStorage.setItem('poll2', JSON.stringify(pollArray2));
+      localStorage.setItem('activePolls', activePolls);
+      break;
+    case 3:
+      localStorage.setItem('poll3', JSON.stringify(pollArray3));
+      localStorage.setItem('activePolls', activePolls);
+      break;
+  }
 
   // create a link to the poll
   createPollLink();
@@ -49,7 +62,17 @@ clearMemoryBtn.addEventListener('click', () => {
   localStorage.clear();
   clearOptions();
   searchResults = [];
+  // needs to be dynamic
   pollArray1 = [];
+  pollArray2 = [];
+  pollArray3 = [];
+  // reset poll number
+  activePolls = 1;
+  // remove links
+  while (document.querySelector('a')) {
+    let link = document.querySelector('a');
+    link.parentNode.removeChild(link);
+  }
 });
 
 // HTTP request to the OMDB api
@@ -126,20 +149,42 @@ function addOption(id) {
   option.classList.add('option');
   option.id = id;
   option.addEventListener('click', (e) => {
-    removeOption(e.target);
+    removeOption(e.target, activePolls);
   });
   option.innerText = searchResults[index]['Title'];
-  pollArray1.push(searchResults[index]);
-  console.log('pollArray1 is now:', pollArray1);
+  incrementPollArray(activePolls, index);
   pollOptions.append(option);
 }
 
+function incrementPollArray(poll, index) {
+  switch (poll) {
+    case 1:
+      pollArray1.push(searchResults[index]);
+      break;
+    case 2:
+      pollArray2.push(searchResults[index]);
+      break;
+    case 3:
+      pollArray3.push(searchResults[index]);
+      break;
+  }
+}
+
 // Remove clicked movie from poll
-function removeOption(element) {
+function removeOption(element, poll) {
   let searchIndex = parseInt(element.id);
-  let pollIndex = pollArray1.indexOf(searchResults[searchIndex]);
-  pollArray1.splice(pollIndex, 1);
-  console.log('pollArray1 is now:', pollArray1);
+  let pollIndex;
+  switch (poll) {
+    case 1:
+      pollIndex = pollArray1.indexOf(searchResults[searchIndex]);
+      pollArray1.splice(pollIndex, 1);
+    case 2:
+      pollIndex = pollArray2.indexOf(searchResults[searchIndex]);
+      pollArray2.splice(pollIndex, 2);
+    case 3:
+      pollIndex = pollArray3.indexOf(searchResults[searchIndex]);
+      pollArray3.splice(pollIndex, 3);
+  }
   element.parentNode.removeChild(element);
 }
 
