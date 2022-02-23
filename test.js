@@ -1,7 +1,16 @@
-let a = [1, 2, 3, 4, 5];
-let b = [];
+function arrayFlattener(array) {
+  let newArr = [];
 
-b = a;
-b = [1, 2];
+  for (let i = 0; i < array.length; i++) {
+    if (Array.isArray(array[i])) {
+      for (let j = 0; j < array[i].length; j++) {
+        newArr.push(array[i][j]);
+      }
+    } else {
+      newArr.push(array[i]);
+    }
+  }
+  return newArr;
+}
 
-console.log(b);
+arrayFlattener([[1, 2, 3, 4], 5, [6, 7, 8, 9]]);

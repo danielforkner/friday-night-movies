@@ -26,14 +26,27 @@ resultsForm.addEventListener('submit', (e) => {
 createPollBtn.addEventListener('click', () => {
   // commit the poll to local memory
   localStorage.setItem(`poll${activePolls}`, JSON.stringify(pollArray1));
-  localStorage.setItem('activePolls', activePolls++);
+  localStorage.setItem('activePolls', activePolls);
+  console.log(`poll${activePolls} has now been stored locally`);
 
   // create a link to the poll
   createPollLink();
+
+  activePolls++;
+
+  // update the header text
+  updatePollNumber();
+
+  // remove options from both the pollLinks area
+  // and the resultsForm
+  clearOptions();
 });
 
 clearMemoryBtn.addEventListener('click', () => {
   localStorage.clear();
+  clearOptions();
+  searchResults = [];
+  pollArray1 = [];
 });
 
 // HTTP request to the OMDB api
@@ -109,20 +122,46 @@ function displayMaxResult() {
 function addOption(id) {
   let index = parseInt(id);
   let option = document.createElement('p');
+  option.classList.add('option');
+  option.id = id;
+  option.addEventListener('click', (e) => {
+    removeOption(e.target);
+  });
   option.innerText = searchResults[index]['Title'];
   pollArray1.push(searchResults[index]);
+  console.log('pollArray1 is now:', pollArray1);
   pollOptions.append(option);
 }
 
 // Remove clicked movie from poll
-function removeOption() {
-  // ...
+function removeOption(element) {
+  let searchIndex = parseInt(element.id);
+  let pollIndex = pollArray1.indexOf(searchResults[searchIndex]);
+  pollArray1.splice(pollIndex, 1);
+  console.log('pollArray1 is now:', pollArray1);
+  element.parentNode.removeChild(element);
+}
+
+function updatePollNumber() {
+  let header = document.getElementById('optionsHeader');
+  header.innerText = `Poll #${activePolls}: give me movies!`;
 }
 
 // currently can only handle Poll1, needs to by dynamic
 function createPollLink() {
   let pollLink = document.createElement('a');
-  pollLink.href = 'poll1.html';
-  pollLink.innerText = 'Link to my first poll';
+  pollLink.href = `poll${activePolls}.html`;
+  pollLink.innerText = `Link to my poll #${activePolls}`;
   pollLinks.append(pollLink);
+}
+
+function clearOptions() {
+  // clear resultsForm
+  while (resultsForm.firstChild) {
+    resultsForm.removeChild(resultsForm.firstChild);
+  }
+  // clear pollOptions
+  while (pollOptions.firstChild) {
+    pollOptions.removeChild(pollOptions.firstChild);
+  }
 }
