@@ -1,5 +1,5 @@
 // API KEY
-const API_KEY = SECRET_API_KEY;
+const API_KEY = secrets.SECRET_API_KEY;
 
 const searchForm = document.getElementById('searchForm');
 const searchTitle = document.getElementById('searchTitle');
