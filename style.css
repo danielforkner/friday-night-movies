@@ -75,6 +75,7 @@ section.searchForm {
 
 .option {
   display: block;
+  cursor: pointer;
 }
 
 .option:hover {
