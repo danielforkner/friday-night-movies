@@ -77,6 +77,10 @@ section.displayPoll {
   width: clamp(350px, 450px, 600px);
 }
 
+.option {
+  display: block;
+}
+
 .option:hover {
   color: blue;
   background-color: gray;
