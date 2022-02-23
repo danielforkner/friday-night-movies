@@ -8,14 +8,24 @@
     <title>New Poll</title>
   </head>
   <body>
-    <p>let's test out movie search</p>
-    <form id="searchForm">
-      <input type="text" id="searchTitle" placeholder="Movie Title" />
-      <input type="text" id="searchYear" placeholder="Year (optional)" />
-      <button type="submit">SEARCH</button>
-    </form>
+    <main class="newPollMain">
+      <section class="searchForm">
+        <p>let's test out movie search</p>
+        <form id="searchForm">
+          <label for="searchTitle">Movie Title</label>
+          <input type="text" id="searchTitle" placeholder="Sing 2" />
+          <label for="searchYear">Year (optional)</label>
+          <input type="text" id="searchYear" placeholder="2021" />
+          <button type="submit">SEARCH</button>
+        </form>
+        <form class="resultsContainer"></form>
+      </section>
 
-    <div class="resultsContainer"></div>
+      <section class="displayPoll">
+        <p>poll #1 give me movies!</p>
+        <div id="poll1"></div>
+      </section>
+    </main>
 
     <!-- SCRIPTS -->
     <script type="text/javascript" src="config.js"></script>

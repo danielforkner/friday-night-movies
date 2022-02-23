@@ -34,8 +34,47 @@ body.landingPage {
 }
 
 /* NEW-POLL . HTML */
-.option {
-  cursor: move;
+.newPollMain {
+  padding: 4rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+section.searchForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#searchForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#searchForm label,
+#searchForm button {
+  margin-top: 0.5rem;
+}
+
+.resultsContainer {
+  width: clamp(350px, 450px, 600px);
+}
+
+section.displayPoll {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#poll1 {
+  border: 3px dotted blue;
+  min-height: 200px;
+  width: clamp(350px, 450px, 600px);
 }
 
 .option:hover {
