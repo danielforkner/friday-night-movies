@@ -55,7 +55,7 @@ clearMemoryBtn.addEventListener('click', () => {
 // HTTP request to the OMDB api
 function sendApiRequest(title, year) {
   axios
-    .get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${title}&y=${year}`)
+    .get(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${title}&y=${year}`)
     .then((result) => {
       checkResult(result);
     })
