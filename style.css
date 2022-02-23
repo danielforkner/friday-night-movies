@@ -41,11 +41,14 @@ body.landingPage {
   gap: 2rem;
 }
 
-section.searchForm {
+section {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+section.searchForm {
   gap: 1rem;
 }
 
@@ -64,14 +67,7 @@ section.searchForm {
   width: clamp(350px, 450px, 600px);
 }
 
-section.displayPoll {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#poll1 {
+#pollOptions {
   border: 3px dotted blue;
   min-height: 200px;
   width: clamp(350px, 450px, 600px);

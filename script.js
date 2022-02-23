@@ -3,8 +3,12 @@ const searchTitle = document.getElementById('searchTitle');
 const searchYear = document.getElementById('searchYear');
 const searchFormSection = document.querySelector('.searchForm');
 const resultsForm = document.querySelector('.resultsForm');
+const pollLinks = document.querySelector('.pollLinks');
 const MAX_RESULT = 10;
+const pollOptions = document.querySelector('#pollOptions');
 const createPollBtn = document.querySelector('#createPollBtn');
+const clearMemoryBtn = document.querySelector('#clearMemory');
+let activePolls = 1;
 let searchResults = [];
 let pollArray1 = [];
 
@@ -21,9 +25,15 @@ resultsForm.addEventListener('submit', (e) => {
 
 createPollBtn.addEventListener('click', () => {
   // commit the poll to local memory
-  localStorage.setItem('poll1', pollArr1);
+  localStorage.setItem(`poll${activePolls}`, JSON.stringify(pollArray1));
+  localStorage.setItem('activePolls', activePolls++);
 
   // create a link to the poll
+  createPollLink();
+});
+
+clearMemoryBtn.addEventListener('click', () => {
+  localStorage.clear();
 });
 
 // HTTP request to the OMDB api
@@ -56,7 +66,6 @@ function checkResult(result) {
 
 // Append movie results
 function displayResult() {
-  console.log(searchResults);
   // remove previous search results, if any
   while (resultsForm.firstChild) {
     resultsForm.removeChild(resultsForm.firstChild);
@@ -64,7 +73,8 @@ function displayResult() {
   // appends maxresult notice
   displayMaxResult();
 
-  // creates an input and label for every movie returned from search
+  // displays the list of movie results
+  // and adds click events to each one
   let len = searchResults.length;
   let movieOption;
   for (let i = 0; i < len; i++) {
@@ -76,37 +86,7 @@ function displayResult() {
       addOption(e.target.id);
     });
     resultsForm.append(movieOption);
-    // THIS WAS FORM CHECKBOXES OPTION
-    // movieOption = document.createElement('input');
-    // optionLabel = document.createElement('label');
-    // optionLabel.classList.add('option');
-    // movieOption.id = `searchResults[${i}]`;
-    // movieOption.name = `searchResults[${i}]`;
-    // movieOption.type = 'checkbox';
-    // movieOption.value = `searchResults[${i}]`;
-    // optionLabel.htmlFor = `searchResults[${i}]`;
-    // resultsForm.append(optionLabel);
-    // optionLabel.append(movieOption);
-    // optionLabel.append(
-    //   ` ${searchResults[i]['Title']} (${searchResults[i]['Year']})`
-    // );
   }
-
-  // addOptionBtn();
-}
-
-// Button submits selected movies to the poll
-// function addOptionBtn() {
-//   let submitBtn = document.createElement('button');
-//   submitBtn.type = 'submit';
-//   submitBtn.innerText = 'Add Selected';
-//   resultsForm.append(submitBtn);
-// }
-
-// Submit clicked movie to poll
-function addOption(id) {
-  let index = parseInt(id);
-  pollArray1.push(searchResults[index]);
 }
 
 // Provides notice there are more results than displayed
@@ -123,4 +103,26 @@ function displayMaxResult() {
       '<em>to get more than 10 results, try refining your search</em>';
     searchFormSection.append(maxResultNotice);
   }
+}
+
+// Add clicked movie to poll
+function addOption(id) {
+  let index = parseInt(id);
+  let option = document.createElement('p');
+  option.innerText = searchResults[index]['Title'];
+  pollArray1.push(searchResults[index]);
+  pollOptions.append(option);
+}
+
+// Remove clicked movie from poll
+function removeOption() {
+  // ...
+}
+
+// currently can only handle Poll1, needs to by dynamic
+function createPollLink() {
+  let pollLink = document.createElement('a');
+  pollLink.href = 'poll1.html';
+  pollLink.innerText = 'Link to my first poll';
+  pollLinks.append(pollLink);
 }
