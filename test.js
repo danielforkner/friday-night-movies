@@ -1,16 +1,12 @@
-function arrayFlattener(array) {
-  let newArr = [];
+let a = 5;
 
-  for (let i = 0; i < array.length; i++) {
-    if (Array.isArray(array[i])) {
-      for (let j = 0; j < array[i].length; j++) {
-        newArr.push(array[i][j]);
-      }
-    } else {
-      newArr.push(array[i]);
-    }
-  }
-  return newArr;
+function add(num1, num2) {
+  let a += (num1 + num2)
+  console.log(a);
+  return a;
 }
 
-arrayFlattener([[1, 2, 3, 4], 5, [6, 7, 8, 9]]);
+add(1, 1);
+add(1, 1);
+add(1, 1);
+add(1, 1);

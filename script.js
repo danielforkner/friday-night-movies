@@ -1,5 +1,5 @@
 // API KEY
-const API_KEY = process.env.SECRET_API_KEY;
+const API_KEY = config.SECRET_API_KEY;
 
 const searchForm = document.getElementById('searchForm');
 const searchTitle = document.getElementById('searchTitle');
