@@ -1,9 +1,5 @@
 // API KEY
-if (config.MY_API_KEY) {
-  var API_KEY = config.MY_API_KEY;
-} else {
-  var API_KEY = SECRET_API_KEY;
-}
+const API_KEY = SECRET_API_KEY;
 
 const searchForm = document.getElementById('searchForm');
 const searchTitle = document.getElementById('searchTitle');
